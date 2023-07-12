@@ -18,7 +18,7 @@ from utils.random_seed import set_seed
 from detectors.detector_factory import detector_factory
 from datasets.load_data import parse_pyg_mlpgate
 
-BENCH_DIR = "../dataset/EPFL/"
+BENCH_DIR = "../dataset/itc99/"
 TMP_DIR = "../tmp"
 EMB_DIR = "../emb"
 BENCH_NAMELIST = []

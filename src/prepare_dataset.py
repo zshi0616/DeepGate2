@@ -34,8 +34,8 @@ def get_parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('--exp_id', default='train')
     parser.add_argument('--start_idx', default=0, type=int)
-    parser.add_argument('--end_idx', default=100, type=int)
-    parser.add_argument('--aig_folder', default='~/studio/dataset/rawaig')
+    parser.add_argument('--end_idx', default=10000, type=int)
+    parser.add_argument('--aig_folder', default='./dataset/rawaig')
 
     args = parser.parse_args()
     return args
@@ -99,7 +99,7 @@ if __name__ == '__main__':
     graphs = {}
     labels = {}
     args = get_parse_args()
-    output_folder = '../data/{}'.format(args.exp_id)
+    output_folder = './data/{}'.format(args.exp_id)
     if not os.path.exists(output_folder):
         os.mkdir(output_folder)
 
@@ -108,13 +108,14 @@ if __name__ == '__main__':
     tot_nodes = 0
     tot_pairs = 0
     name_list = []
-    for mig_filename in glob.glob(os.path.join(args.aig_folder, '*.bench')):
+    print('[INFO] Read bench from: ', args.aig_folder)
+    for bench_filename in glob.glob(os.path.join(args.aig_folder, '*.bench')):
         tot_circuit += 1
-        name_list.append(mig_filename)
-    for mig_filename in name_list[args.start_idx: min(args.end_idx, len(name_list))]:
-        circuit_name = mig_filename.split('/')[-1].split('.')[0]
+        name_list.append(bench_filename)
+    for bench_filename in name_list[args.start_idx: min(args.end_idx, len(name_list))]:
+        circuit_name = bench_filename.split('/')[-1].split('.')[0]
 
-        x_data, edge_index, fanin_list, fanout_list, level_list = circuit_utils.parse_bench(mig_filename, gate_to_index)
+        x_data, edge_index, fanin_list, fanout_list, level_list = circuit_utils.parse_bench(bench_filename, gate_to_index)
         # PI
         PI_index = level_list[0]
 

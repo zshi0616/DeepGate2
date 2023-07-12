@@ -15,14 +15,18 @@ conda activate deepgate2
 pip install -r requirements.txt
 ```
 
-## Prepare Dataset 
-Please refer the script `./src/prepare_dataset.py` for dataset preparation. You should set the folder with circuit netlist in .bench format. 
+## Model Training 
+1. Prepare Dataset
+Make sure that there are graphs.npz and labels.npz in `./data/train` folder, which are the dataset as mentioned in the paper. 
+If you want to customize the training dataset, the extracted sub-circuits are in `./dataset/rawaig.tar.bz2` and refer the script `./src/prepare_dataset.py` for dataset preparation. 
 ```sh
-cd src
-python ./src/prepare_dataset.py # Use the default settings
+cd dataset
+tar -jxvf rawaig.tar.bz2
+cd ..
+python ./src/prepare_dataset.py --exp_id train --aig_folder ./dataset/rawaig # Use the default settings 
 ```
 
-## Model Training 
+2. Model Training
 The model training is separated into two stages. 
 Model learns to predict the logic probability in Stage.1, which is the same task with previous version of DeepGate
 Model learns to predict the pairwise truth table difference of two gates in Stage.2. 
@@ -31,12 +35,10 @@ bash ./run/stage1_train.sh
 bash ./run/stage2_trun.sh
 ```
 ## Model Inference
-You can test the model with the testing dataset. Please remember generate the testing dataset before that. 
-```sh
-bash ./run/test.sh
-```
+This repo supports directly process netlist (.bench or .aig) and generate gate embeddings into file. 
 
-This model also support to parse raw data (in .aig or .bench format) and generate gate embeddings into file. Therefore, you can apply these embeddings to downstream tasks
+This model also support to parse raw data (in .aig or .bench format) and generate gate embeddings into file. If you need to employ the trained model, please use `./src/get_emb_bench.py` or `./src/get_emb_aig.py`. 
+For example, you can generate the gate-level embeddings for each gate in bench netlist. 
 ```sh
 cd src
 python get_emb_bench.py

@@ -11,6 +11,11 @@ import numpy as np
 
 from .circuit_utils import random_pattern_generator, logic
 
+def rename_node(x_data):
+    for idx in range(len(x_data)):
+        x_data[idx][0] = idx
+    return x_data
+
 class AverageMeter(object):
     """Computes and stores the average and current value"""
     def __init__(self):

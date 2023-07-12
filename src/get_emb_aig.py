@@ -24,7 +24,7 @@ from detectors.detector_factory import detector_factory
 from datasets.mlpgate_dataset import MLPGateDataset
 from datasets.load_data import parse_pyg_mlpgate
 
-AIG_DIR = "../dataset/EPFL/"
+AIG_DIR = "../dataset/epfl/"
 TMP_DIR = "./tmp"
 EMB_DIR = "./emb"
 NEW_AIG_DIR = './tmp/aig'

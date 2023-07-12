@@ -26,43 +26,39 @@ def random_pattern_generator(no_PIs):
     return vector
 
 
-def logic(gate_type, signals):
-    if gate_type == 1:  # AND
+def logic(gate_type, signals, gate_to_index):
+    if 'AND' in gate_to_index.keys() and gate_type == gate_to_index['AND']:  # AND
         for s in signals:
             if s == 0:
                 return 0
         return 1
 
-    elif gate_type == 2:  # NAND
+    elif 'NAND' in gate_to_index.keys() and gate_type == gate_to_index['NAND']:  # NAND
         for s in signals:
             if s == 0:
                 return 1
         return 0
 
-    elif gate_type == 3:  # OR
+    elif 'OR' in gate_to_index.keys() and gate_type == gate_to_index['OR']:  # OR
         for s in signals:
             if s == 1:
                 return 1
         return 0
 
-    elif gate_type == 4:  # NOR
+    elif 'NOR' in gate_to_index.keys() and gate_type == gate_to_index['NOR']:  # NOR
         for s in signals:
             if s == 1:
                 return 0
         return 1
 
-    elif gate_type == 5:  # NOT
+    elif 'NOT' in gate_to_index.keys() and gate_type == gate_to_index['NOT']:  # NOT
         for s in signals:
             if s == 1:
                 return 0
             else:
                 return 1
 
-    # elif gate_type == 6:  # BUFF
-    #  for s in signals:
-    #      return s
-
-    elif gate_type == 6:  # XOR
+    elif 'XOR' in gate_to_index.keys() and gate_type == gate_to_index['XOR']:  # XOR
         z_count = 0
         o_count = 0
         for s in signals:
@@ -979,7 +975,7 @@ def feature_gen_connect(data, gate_to_index):
     for line in data:
         if 'INPUT(' in line:
             node_name = line.split("(")[-1].split(')')[0]
-            new_node(name2idx, x_data, node_name, get_gate_type('PI', gate_to_index))
+            new_node(name2idx, x_data, node_name, get_gate_type('INPUT', gate_to_index))
         elif 'AND(' in line or 'NAND(' in line or 'OR(' in line or 'NOR(' in line \
                 or 'NOT(' in line or 'XOR(' in line or 'BUF(' in line:
             node_name = line.split(':')[-1].split('=')[0].replace(' ', '')
