@@ -1,6 +1,7 @@
 emb/*
 exp/*
-data/*
+.vscode
 
 *__pycache__
 *.pyc
+*inmemory*
