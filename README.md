@@ -32,7 +32,8 @@ Model learns to predict the logic probability in Stage.1, which is the same task
 Model learns to predict the pairwise truth table difference of two gates in Stage.2. 
 ```sh
 bash ./run/stage1_train.sh
-bash ./run/stage2_trun.sh
+python src/reset_model.py prob
+bash ./run/stage2_train.sh
 ```
 ## Model Inference
 This repo supports directly process netlist (.bench or .aig) and generate gate embeddings into file. 
