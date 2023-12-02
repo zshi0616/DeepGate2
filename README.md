@@ -1,5 +1,7 @@
 # DeepGate2: Functionality-Aware Circuit Representation Learning
 
+We strongly recommand the python-deepgate (only 3 lines to import pretrained DeepGate2), can be found: [**here**](https://github.com/Ironprop-Stone/python-deepgate)
+
 Code repository for the paper:  
 **DeepGate2: Functionality-Aware Circuit Representation Learning**, 
 
